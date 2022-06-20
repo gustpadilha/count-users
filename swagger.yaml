@@ -1,0 +1,110 @@
+---
+swagger: "2.0"
+info:
+  description: Cadastro e consulta de usuários, e controle de acessos
+  version: 1.0.0
+  title: Controle de Acesso
+basePath: /
+tags:
+- name: users
+  description: User authentication
+schemes:
+- https
+- http
+paths:
+  /users:
+    post:
+      tags:
+      - users
+      summary: Create user
+      description: ""
+      operationId: createUser
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: body
+        description: User Data
+        required: true
+        schema:
+          type: object
+          required:
+          - id
+          - name
+          - email
+          properties:
+            id:
+              type: string
+            name:
+              type: string
+            email:
+              type: string
+      responses:
+        "200":
+          description: Successful Operation
+        "400":
+          description: Invalid payload
+          
+  /users/{id}:
+    get:
+      tags:
+      - users
+      summary: Get user by ID
+      description: Get user by ID
+      operationId: getUserById
+      produces:
+      - application/json
+      parameters:
+      - name: id
+        in: path
+        description: user_id
+        required: true
+        type: integer
+      responses:
+        "200":
+          description: Successful Operation
+        "404":
+          description: User Not Found
+    put:
+      tags:
+      - users
+      summary: Increment user counter by ID
+      description: Increment user counter by ID
+      operationId: incrementById
+      produces:
+      - application/json
+      parameters:
+      - name: id
+        in: path
+        description: user_id
+        required: true
+        type: integer
+      responses:
+        "200":
+          description: Successful Operation
+        "404":
+          description: User Not Found
+  /users/access/{id}:
+    get:
+      tags:
+      - users
+      summary: Get user counter by ID
+      description: Get user counter by ID
+      operationId: getUserCounterById
+      produces:
+      - application/json
+      parameters:
+      - name: id
+        in: path
+        description: user_id
+        required: true
+        type: integer
+      responses:
+        "200":
+          description: Successful Operation
+        "404":
+          description: User Not Found
+
+externalDocs:
+  description: Find out more about Swagger
+  url: http://swagger.io
